@@ -66,10 +66,10 @@ class MyWindow(QtWidgets.QWidget, Form):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    window = MyWindow()  # Создаем экземпляр класса
+    window = MyWindow()
     window.setWindowTitle("Ковертер Fb2 > Txt")
     window.setWindowIcon(
-        QtGui.QIcon('skull.png'))  # рисуем иконку
-    window.show()  # Отображаем окно
+        QtGui.QIcon('skull.png'))
+    window.show()
 
-    sys.exit(app.exec_())  # Запускаем цикл обработки событий
+    sys.exit(app.exec_())
