@@ -14,7 +14,7 @@ from PyQt5.QtCore import *
 warnings.filterwarnings("ignore")
 Form, Base = uic.loadUiType("converter.ui")
 
-cleart = ''
+
 
 
 class MyWindow(QtWidgets.QWidget, Form):
@@ -31,15 +31,13 @@ class MyWindow(QtWidgets.QWidget, Form):
 
     def getfiles(self):
 
-        fname = QFileDialog.getOpenFileName(self, "Open fb2", "/home/",
-                                            "FictionBook Files (*.fb2)")[0]
-        k = open(fname, 'r')
-        with k:
-            data = k.read()
+        fname = QFileDialog.getOpenFileName(self, "Open fb2", "/home/", "FictionBook Files (*.fb2)")[0]
+
+        with open(fname, 'r') as data:
+            data = data.read()
             self.ui.textIn.setText(data)
-        self.ui.mylabel.setText(f'Input file: {fname}')
-        k.close
-        global f_out
+            self.ui.mylabel.setText(f'Input file: {fname}')
+
         global fout
         fout = re.sub(r'\.fb2', '', fname)
         fout = fout + '.txt'
