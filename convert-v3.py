@@ -14,9 +14,6 @@ from PyQt5.QtCore import *
 warnings.filterwarnings("ignore")
 Form, Base = uic.loadUiType("converter.ui")
 
-
-
-
 class MyWindow(QtWidgets.QWidget, Form):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
