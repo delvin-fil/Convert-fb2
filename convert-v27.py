@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
 import re
@@ -13,8 +13,6 @@ from PyQt5.QtCore import *
 
 warnings.filterwarnings("ignore")
 Form, Base = uic.loadUiType("converter.ui")
-
-
 
 class MyWindow(QtWidgets.QWidget, Form):
     def __init__(self, parent=None):
@@ -31,14 +29,11 @@ class MyWindow(QtWidgets.QWidget, Form):
     def getfiles(self):
 
         fname = QFileDialog.getOpenFileName(self, "Open fb2", "/home/", "FictionBook Files (*.fb2)")[0]
-        fname = 'zero.txt'
+
         with open(fname, 'r') as data:
-            if fname == '':
-                fname = 'zero.txt'
-            else:
-                data = data.read()
-                self.ui.textIn.setText(data)
-                self.ui.mylabel.setText(f'Input file: {fname}')
+            data = data.read()
+            self.ui.textIn.setText(data)
+            self.ui.mylabel.setText('Input file: ' + fname)
 
         global fout
         fout = re.sub(r'\.fb2', '', fname)
@@ -57,19 +52,15 @@ class MyWindow(QtWidgets.QWidget, Form):
             global cleart, cleart2
             cleart = et.tounicode(tree)
             cleart = re.sub(r'\<[^>]*\>', '', cleart)
-
             self.ui.textOut.setText(cleart)
 
     def convertfiles(self):
-        if self.ui.textOut.toPlainText() == '' or self.ui.textIn.toPlainText() == '':
-            self.ui.textOut.setText('ОТКРОЙ ФАЙЛ!')
-        else:
-            cleart2 = self.ui.textOut.toPlainText()
-            self.ui.mylabel.setText('')
-            with open(fout, 'w') as f_out:
-                f_out.write(cleart2)
-                self.ui.mylabel.setText(f'Saved file: {fout}')
-                print(fout)
+        cleart2 = self.ui.textOut.toPlainText()
+        self.ui.mylabel.setText('')
+        with open(fout, 'w') as f_out:
+            f_out.write(cleart2)
+        self.ui.mylabel.setText(f'Saved file: ' + fout)
+        print(fout)
 
 
 if __name__ == "__main__":
